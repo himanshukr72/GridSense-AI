@@ -2,7 +2,8 @@ dataset:
   record_id: "14983362"
   record_url: "https://zenodo.org/records/14983362"
   doi: "10.5281/zenodo.14983362"
-  raw_dir: "data/raw/zenodo"
+  # Existing source location: <project-root>/data/raw (read-only).
+  raw_dir: "data/raw"
   interim_dir: "data/interim"
   processed_dir: "data/processed"
   audit_dir: "reports/data_audit"

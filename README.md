@@ -76,12 +76,13 @@ python scripts/build_dataset.py
 python scripts/validate_dataset.py
 ```
 
-1. Download all files listed by the Zenodo record API to `data/raw/zenodo/`.
-2. Inspect `reports/data_audit/file_inventory.csv` and `schema_report.json`.
-3. Check the actual column names, date coverage, file sizes, nulls and duplicates.
-4. Build long-form electricity and weather data. The starter builder expects wide electricity files with date + state columns and one state weather CSV per state. If the audit shows a different schema, update the mappings before proceeding.
-5. Review `state_coverage.csv`, `missingness_by_state.csv` and join coverage. Do not assume all states have equally complete electricity data.
-6. Document the analytical sample separately for each method. Cointegration requires suitable integration orders and overlapping dates; GARCH needs an appropriate stationary input; spectral analysis needs consistently sampled data.
+1. Keep the 42 original CSV files exactly where they are: `<project-root>/data/raw/`. For this project, that is `C:\Users\himan\Education1\Projects\GridSense-AI\data\raw`. Do not move, rename, or edit them.
+2. `configs/data_config.yaml` is the single source of truth for input/output directories. Its `raw_dir: data/raw` is resolved relative to the repository root, even if commands are launched from another working directory.
+3. Run `python scripts/inspect_dataset.py` to refresh `reports/data_audit/file_inventory.csv` and `schema_report.json`.
+4. Run `python scripts/build_dataset.py`. It reads source files in place (read-only) and writes only to `data/interim/`, `data/processed/`, and `reports/data_audit/`. It neither moves nor duplicates source CSVs.
+5. Run `python scripts/validate_dataset.py` and review `state_coverage.csv`, `missingness_by_state.csv`, `column_missingness.csv`, and `build_report.json`. Do not assume all states have equally complete electricity data.
+6. If the raw folder is ever different, change only `dataset.raw_dir` in `configs/data_config.yaml`, or pass `--raw-dir \"D:\\somewhere\\raw\"` to the builder.
+7. Document the analytical sample separately for each method. Cointegration requires suitable integration orders and overlapping dates; GARCH needs an appropriate stationary input; spectral analysis needs consistently sampled data.
 
 ## Five-module research plan
 | Module | Methods | Outputs |
