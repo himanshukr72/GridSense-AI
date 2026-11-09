@@ -1,0 +1,21 @@
+dataset:
+  record_id: "14983362"
+  record_url: "https://zenodo.org/records/14983362"
+  doi: "10.5281/zenodo.14983362"
+  raw_dir: "data/raw/zenodo"
+  interim_dir: "data/interim"
+  processed_dir: "data/processed"
+  audit_dir: "reports/data_audit"
+electricity_files:
+  energy_met: "corrected_daily_energy_met_MU.csv"
+  peak_met: "corrected_peak_met_MW.csv"
+  peak_unmet: "peak_unmet_MW.csv"
+columns:
+  date_candidates: ["date", "Date", "datetime", "time", "timestamp"]
+  state_column: "state"
+  weather_temperature_kelvin: "2m_temperature_mean"
+processing:
+  date_frequency: "D"
+  duplicate_policy: "report_and_stop"
+  outer_join_weather_and_electricity: true
+  all_states: true

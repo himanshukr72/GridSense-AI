@@ -1,0 +1,19 @@
+agent:
+  provider_env: LLM_PROVIDER
+  model_env: OPENAI_MODEL
+  api_key_env: OPENAI_API_KEY
+  temperature: 0
+safety:
+  database_access: read_only
+  allow_arbitrary_sql: false
+  require_tool_evidence_for_numbers: true
+  disclose_missing_or_unavailable_results: true
+tools:
+  - get_state_summary
+  - get_stationarity_results
+  - get_forecast
+  - get_cointegration_results
+  - get_structural_break_results
+  - get_volatility_results
+  - get_spectral_results
+  - get_risk_indicators

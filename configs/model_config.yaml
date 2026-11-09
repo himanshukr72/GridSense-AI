@@ -1,0 +1,18 @@
+evaluation:
+  strategy: chronological
+  train_fraction: 0.80
+  forecast_horizons_days: [1, 7]
+  primary_metrics: [MAE, RMSE]
+  additional_metrics: [R2, MAPE]
+seasonality:
+  candidate_periods: [7, 365]
+arima:
+  max_p: 5
+  max_d: 2
+  max_q: 5
+garch:
+  mean_input: stationary_transformed_series
+  distributions: [normal, t]
+  models: [GARCH, EGARCH, GJR-GARCH]
+reproducibility:
+  random_state: 42

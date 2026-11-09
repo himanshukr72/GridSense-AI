@@ -1,0 +1,3 @@
+import React from 'react'; import {createRoot} from 'react-dom/client'; import './style.css';
+function App(){return <main><header><b>GS</b><div><h1>GridSense AI</h1><p>Electricity Supply Intelligence</p></div></header><section><small>RESEARCH & INTELLIGENCE PLATFORM</small><h2>Understand the dynamics of electricity supply.</h2><p>Time-series econometrics, forecasting and evidence-grounded AI for Indian states.</p></section><nav>{['Econometric Laboratory','Forecasting Centre','Grid Stress Intelligence','AI Research Assistant'].map((x,i)=><article key={x}><small>0{i+1}</small><h3>{x}</h3><p>Module under development</p></article>)}</nav></main>}
+createRoot(document.getElementById('root')).render(<App/>);
