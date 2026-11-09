@@ -3,7 +3,7 @@ import requests
 from tqdm import tqdm
 
 RECORD_ID = "14983362"
-OUT = Path("data/raw/zenodo")
+OUT = Path("data/raw")
 CHUNK = 1024 * 1024
 
 def main():

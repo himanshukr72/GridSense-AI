@@ -2,7 +2,7 @@ from pathlib import Path
 import json
 import pandas as pd
 
-RAW = Path("data/raw/zenodo")
+RAW = Path("data/raw")
 OUT = Path("reports/data_audit")
 OUT.mkdir(parents=True, exist_ok=True)
 DATE_NAMES = {"date", "datetime", "time", "timestamp"}
@@ -29,18 +29,43 @@ def inspect(path):
 
 def main():
     if not RAW.exists():
-        raise FileNotFoundError("Run python scripts/download_zenodo.py first.")
-    paths = sorted(RAW.glob("*.csv"))
-    if not paths:
-        raise FileNotFoundError(f"No CSV files found in {RAW}")
-    report = [inspect(p) for p in paths]
-    pd.DataFrame([{"file": x["file"], "rows": x["rows"],
-                   "columns_count": len(x["columns"]), "file_size_bytes": x["file_size_bytes"],
-                   "date_column": x["date_column_candidate"], "min_date": x["min_date"],
-                   "max_date": x["max_date"]} for x in report]).to_csv(OUT/"file_inventory.csv", index=False)
-    (OUT/"schema_report.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
-    print(pd.read_csv(OUT/"file_inventory.csv").to_string(index=False))
-    print(f"Audit saved in {OUT.resolve()}")
+        raise FileNotFoundError(
+            f"Data directory not found: {RAW}"
+        )
 
+    csv_files = sorted(RAW.glob("*.csv"))
+
+    if not csv_files:
+        raise FileNotFoundError(
+            f"No CSV files found inside {RAW}"
+        )
+
+    reports = [inspect(path) for path in csv_files]
+
+    inventory = pd.DataFrame([
+        {
+            "file": x["file"],
+            "rows": x["rows"],
+            "columns_count": len(x["columns"]),
+            "file_size_bytes": x["file_size_bytes"],
+            "date_column": x["date_column_candidate"],
+            "min_date": x["min_date"],
+            "max_date": x["max_date"]
+        }
+        for x in reports
+    ])
+
+    inventory.to_csv(
+        OUT / "file_inventory.csv",
+        index=False
+    )
+
+    (OUT / "schema_report.json").write_text(
+        json.dumps(reports, indent=2),
+        encoding="utf-8"
+    )
+
+    print(inventory.to_string(index=False))
+    print(f"Audit saved in {OUT.resolve()}")
 if __name__ == "__main__":
     main()

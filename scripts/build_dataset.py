@@ -1,7 +1,7 @@
 from pathlib import Path
 import pandas as pd
 
-RAW, INTERIM, PROCESSED = Path("data/raw/zenodo"), Path("data/interim"), Path("data/processed")
+RAW, INTERIM, PROCESSED = Path("data/raw"), Path("data/interim"), Path("data/processed")
 DATE_CANDIDATES = ["date", "Date", "datetime", "time", "timestamp"]
 ELEC_FILES = {
     "daily_energy_met_MU": "corrected_daily_energy_met_MU.csv",

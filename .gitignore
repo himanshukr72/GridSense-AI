@@ -1,3 +1,7 @@
+
+# ==============================
+# Python Environment
+# ==============================
 __pycache__/
 *.py[cod]
 *.egg-info/
@@ -5,24 +9,50 @@ __pycache__/
 venv/
 .pytest_cache/
 .ipynb_checkpoints/
+
+# ==============================
+# Dataset Files - DO NOT PUSH
+# ==============================
+data
 data/raw/*
 data/interim/*
 data/processed/*
+
+# Preserve directory structure
 !data/raw/.gitkeep
 !data/interim/.gitkeep
 !data/processed/.gitkeep
-artifacts/models/*
-artifacts/forecasts/*
-artifacts/econometric_results/*
-reports/figures/*
-reports/tables/*
-!reports/figures/.gitkeep
-!reports/tables/.gitkeep
+
+# ==============================
+# Model Artifacts
+# ==============================
+artifacts/models/
+artifacts/forecasts/
+artifacts/econometric_results/
+
+# ==============================
+# Generated Reports
+# ==============================
+reports/figures/
+reports/tables/
+
+# ==============================
+# Environment Variables / Secrets
+# ==============================
 .env
 .env.*
 !.env.example
+
+# ==============================
+# Frontend
+# ==============================
+node_modules/
 frontend/node_modules/
 frontend/dist/
+
+# ==============================
+# IDE and OS
+# ==============================
 .vscode/
 .idea/
 .DS_Store
